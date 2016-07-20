@@ -25,11 +25,10 @@ Sources += copy.tex
 
 math.draft.pdf: math.txt
 
-
 ## Markup
 
 math.txt: ../makestuff/newtalk/JD_lecture_format.pl math.old.txt
-	$(PUSH)
+#	$(PUSH)
 
 ######################################################################
 
