@@ -10,13 +10,13 @@ target pngtarget pdftarget vtarget acrtarget: math.draft.pdf
 
 Sources = Makefile .gitignore README.md stuff.mk LICENSE.md
 include stuff.mk
-include $(ms)/perl.def
+-include $(ms)/perl.def
 
 ##################################################################
 
 ## Content
 
-include $(ms)/newtalk.def
+-include $(ms)/newtalk.def
 
 Sources += local.txt.format
 
@@ -41,7 +41,7 @@ Archive += math.draft.pdf
 
 -include $(ms)/git.mk
 -include $(ms)/visual.mk
-include $(ms)/newtalk.mk
+-include $(ms)/newtalk.mk
 
 # -include $(ms)/wrapR.mk
 -include $(ms)/newlatex.mk
