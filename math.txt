@@ -1,0 +1,639 @@
+
+DEFHEAD $r$ and $\Rx$
+
+	Initial growth rate, generation intervals and reproductive numbers in the spread of infectious disease
+
+\vfill 
+
+	ICMA-V
+
+	University of Western Ontario
+
+\vfill
+
+	Jonathan Dushoff
+
+	McMaster University
+
+\vfill
+
+----------------------------------------------------------------------
+
+SEC $r$ and $\Rx$
+
+----------------------------------------------------------------------
+
+TSUB Disease modeling
+
+BCC
+
+WIDEFIG Lecture_images/ebola_ward.jpg
+
+NCC
+
+WIDEFIG WA_Ebola_Outbreak/liberia.npc.tsplot.Rout-3.pdf
+
+EC
+
+----------------------------------------------------------------------
+
+Box models of disease
+
+WIDEFIG SIR_model_family/sir.four.pdf
+
+----------------------------------------------------------------------
+
+Add an exposed class
+
+WIDEFIG SIR_model_family/seir.four.pdf
+
+----------------------------------------------------------------------
+
+Epidemic data
+
+BCC
+
+WIDEFIG WA_Ebola_Outbreak/liberia.npc.tsplot.Rout-3.pdf
+
+NCC
+
+WIDEFIG WA_Ebola_Outbreak/sierraLeone.npc.tsplot.Rout-3.pdf
+
+EC
+
+----------------------------------------------------------------------
+
+DEFHEAD $r$ -- the growth rate
+
+BCC
+
+	$$i(t) \approx i(0) \exp(rt)$$
+
+	$$T_c = 1/r$$
+
+	$$T_2 = \ln(2)/r$$
+
+NCC
+
+	$r_0$ can be observed early in the epidemic
+
+	$r$ can typically be measured more robustly than $\Rx$
+
+EC
+
+----------------------------------------------------------------------
+
+DEFHEAD $\Rx$ -- the reproductive number
+
+	Expected number of new cases per cases
+	
+	$\Rx = \beta D S/N$
+
+		Disease increases iff $\Rx>1$
+
+	$\Ro = \beta D$
+
+		Disease is usually eliminated when $\Ro<1$
+
+----------------------------------------------------------------------
+
+SEC Time scales and disease risk
+
+----------------------------------------------------------------------
+
+TSS Post-death transmission and safe burial
+
+	How much Ebola spread occurs before vs.\ after death
+
+	Highly context dependent
+
+		Funeral practices, disease knowledge
+
+	CREDIT Weitz and Dushoff \emph{Scientific Reports} 5:8751.
+
+----------------------------------------------------------------------
+
+Standard disease model 
+
+WIDEFIG SIR_model_family/seir.four.pdf
+
+----------------------------------------------------------------------
+
+Disease model including post-death transmission
+
+WIDEFIG SIR_model_family/seird.four.pdf
+
+----------------------------------------------------------------------
+
+Disease model including post-death transmission
+
+WIDEFIG SIR_model_family/brides.four.pdf
+
+----------------------------------------------------------------------
+
+Scenarios
+
+FIG my_images/weitz_full.pdf
+
+----------------------------------------------------------------------
+
+Conclusions
+
+	Different parameters can produce indistinguishable early dynamics
+
+	More after-death transmission implies
+
+		Higher \Ro
+
+		Larger epidemics
+
+		Larger importance of safe burials
+	
+----------------------------------------------------------------------
+
+TSS Generation time and disease risk
+
+	Which is more dangerous, a fast disease, or a slow disease?
+
+		How are we measuring speed?
+
+		How are we measuring danger?
+
+		\emph{What are we conditioning on?}
+
+----------------------------------------------------------------------
+
+Exponential growth
+
+BCC
+
+	The characteristic time scale for Ebola \emph{spread} during the
+	outbreak period was $C \approx 1 \mathrm{month}$
+
+	In other words, incidence was following $i(t) = i(0) \exp(t/C)$
+
+	Faster $C \implies$ more danger
+
+NCC
+
+WIDEFIG Ebola_sims/base.tsplots.Rout-0.png
+
+EC
+
+----------------------------------------------------------------------
+
+Life cycle
+
+BCC
+
+	$C$ is the characteristic time for Ebola \emph{growth} \ldots
+
+	$G$ is the generation distribution
+
+		Interval between ``index'' infection and resulting infection
+	
+	What does $G$ tell us about how dangerous the epidemic is?
+
+		It depends on what else we know!
+
+NCC
+
+WIDEFIG Generation_distributions/gamHist.Rout-4.pdf
+
+EC
+
+----------------------------------------------------------------------
+
+Conditional effect of generation time
+
+FIG Generation_distributions/condition.Rout-0.pdf 
+
+----------------------------------------------------------------------
+
+Conditional effect of generation time
+
+FIG Generation_distributions/condition.Rout-1.pdf 
+
+----------------------------------------------------------------------
+
+Conditional effect of generation time
+
+FIG Generation_distributions/condition.Rout-2.pdf 
+
+----------------------------------------------------------------------
+
+Conditional effect of generation time
+
+FIG Generation_distributions/condition.Rout-3.pdf 
+
+----------------------------------------------------------------------
+
+Conditional effect of generation time
+
+	\emph{Given} the reproductive number $\Rx$
+	
+		faster generation time $G$ means faster spread time $C$
+
+		More danger
+
+	\emph{Given} the spread time $C$
+
+		faster generation time $G$ means \emph{smaller} \Rx
+
+		Less danger
+
+----------------------------------------------------------------------
+
+Generations and \Rx
+
+FIG Generation_distributions/steps.Rout-1.pdf
+
+----------------------------------------------------------------------
+
+Generations and \Rx
+
+FIG Generation_distributions/steps.Rout-0.pdf
+
+----------------------------------------------------------------------
+
+DEFHEAD \Rx\ vs.\ $C$
+
+	We typically think \Rx\ is more important
+
+	Higher \Rx:
+
+		Higher final attack rate if nothing changes
+
+		Broader intervention required
+
+	Faster $C$ (higher $r$):
+
+		Less time for behaviour change
+
+		Faster intervention required
+
+----------------------------------------------------------------------
+
+SEC Generation times and generating functions
+
+----------------------------------------------------------------------
+
+Generation intervals
+
+	Intrinsic generation distribution:
+
+		How infectious a `typical' infected \emph{individual} is over the
+		course of infection
+
+	\emph{forward} generation distribution:
+
+		the distribution of infectious times of people \emph{infected by}
+		the cohort infected at time $t$
+
+	\emph{backward} generation distribution:
+
+		the distribution of infectious times of people \emph{who infected}
+		the cohort infected at time $t$
+
+	In the exponential phase, only the \emph{forward} distribution
+	should be used to estimate the intrinsic distribution
+
+----------------------------------------------------------------------
+
+Disease model
+
+	Many disease models behave \emph{on average} like this:
+
+		$$i(t) = \int{k(\tau)i(t-\tau) \,d\tau}$$
+
+	We write:
+	
+		$$k(\tau) = \Rx g(\tau),$$ 
+
+	Where:
+
+		\Rx\ is the effective reproductive number
+
+		$g(\tau)$ (integrates to 1)  
+		is the \emph{intrinsic} generation distribution
+
+----------------------------------------------------------------------
+
+Euler equation 
+
+	Model
+
+		$$i(t) = \Rx\int{g(\tau)i(t-\tau) \,d\tau}$$
+
+	Exponential phase
+
+		$$i(t) = i(0) \exp(t/C)$$
+
+	Conclusion
+
+		$$1/\Rx = \int{g(\tau)\exp(-\tau/C) \,d\tau}$$
+
+----------------------------------------------------------------------
+
+Interpretation: the ``effective'' generation time
+
+	If the generation interval were absolutely fixed at a time interval
+	of $G$, then 
+
+		$${\Rx} = \exp(G/C)$$
+
+	\emph{Define} the effective generation time so that this remains
+	true:
+
+		$${\Rx} = \exp(\hat G/C)$$
+
+----------------------------------------------------------------------
+
+A filtered mean
+
+	If:
+
+		$${\Rx} = \exp(\hat G/C)$$
+
+	Then
+
+		$$1/\Rx = \int{g(\tau)\exp(-\tau/C) \,d\tau}$$
+
+	Becomes
+
+		$$\exp(- \hat G/C) = \int{g(\tau)\exp(-\tau/C) \,d\tau}$$
+		
+		or, $$\exp(-\hat G/C) = \langle \exp(-\tau/C) \rangle_g$$,
+
+	This is a ``filtered mean" of the distribution $g$.
+
+	Equivalent to the Wallinga and Lipsitch generating function
+
+----------------------------------------------------------------------
+
+Filtered means
+
+	Many things we know about are examples of filtered means
+
+		Geometric mean (log function)
+
+		Harmonic mean (reciprocal function)
+
+		Root mean square (square) 
+
+		Heterogeneous \Rx\ calculations
+
+----------------------------------------------------------------------
+
+Arithmetic mean
+
+FIG Generation_distributions/lognormal.filtered.Rout-6.pdf
+
+----------------------------------------------------------------------
+
+Geometric mean
+
+FIG Generation_distributions/lognormal.filtered.Rout-3.pdf
+
+----------------------------------------------------------------------
+
+Geometric mean
+
+FIG Generation_distributions/lognormal.filtered.Rout-4.pdf
+
+----------------------------------------------------------------------
+
+Harmonic mean
+
+FIG Generation_distributions/lognormal.filtered.Rout-5.pdf
+
+----------------------------------------------------------------------
+
+
+Root mean square
+
+FIG Generation_distributions/lognormal.filtered.Rout-7.pdf
+
+----------------------------------------------------------------------
+
+Discount, $T_c = 15d$
+
+FIG Generation_distributions/lognormal.filtered.Rout-0.pdf
+
+----------------------------------------------------------------------
+
+Discount, $T_c = 30d$
+
+FIG Generation_distributions/lognormal.filtered.Rout-1.pdf
+
+----------------------------------------------------------------------
+
+Discount, $T_c = 45d$
+
+FIG Generation_distributions/lognormal.filtered.Rout-2.pdf
+
+----------------------------------------------------------------------
+
+Discount, $T_c = 15d$
+
+FIG Generation_distributions/lognormal.filtered.Rout-0.pdf
+
+----------------------------------------------------------------------
+
+Exponential distribution
+
+FIG Generation_distributions/exponential.filtered.Rout-0.pdf
+
+----------------------------------------------------------------------
+
+Discount, $T_c = 45d$
+
+FIG Generation_distributions/exponential.filtered.Rout-2.pdf
+
+----------------------------------------------------------------------
+
+Filtered means have intuitive properties
+
+	Shifts in distribution shift the mean about how you would expect
+
+		More late transmission means longer $\hat G$
+
+	Importance of values depends on value of the filter function
+
+	We can predict from the filter function what the effects of
+	increasing variance will be
+
+	As distribution gets narrower, $\hat G$ approaches $\bar G$
+
+----------------------------------------------------------------------
+
+The filtering function
+		
+	$\exp(-\hat G/C) = \langle \exp(-\tau/C) \rangle_g$,
+
+	$\hat G$ is the mean of the generation distribution $g(\tau)$ ...
+
+	Filtered by the discount function associated with the rate of
+	exponential growth of the epidemic 
+
+----------------------------------------------------------------------
+
+SEC Moment approximations
+
+----------------------------------------------------------------------
+
+Tangled web
+
+	The filtered mean is useful -- but complicated
+
+		Filtering function is not scale free.
+
+	Unless the \emph{generation interval} (not recovery time) is
+	absolutely fixed, $\hat G$ will change even when $g$ does not
+
+	How is
+	
+		$$\Rx = \exp(\hat G/C)$$
+
+	Consistent with
+
+		$$\Rx = 1 + \bar G/C?$$
+
+----------------------------------------------------------------------
+
+An approximation
+
+	We connect these quantities with a moment approximation
+
+	Define $\kappa = {\sigma^2_G}/{\mu^2_G}$ -- the squared
+	coefficient of variation of the generation distribution
+
+	$\Rx \approx (1 + \kappa \bar G/C)^{1/\kappa}$
+
+		Equal when $G$ has a gamma distribution
+
+		Not clear how good an approximation it is in general
+
+		May be a useful qualitative guide even when it's not
+		quantitatively accurate
+
+----------------------------------------------------------------------
+
+Moment approximation
+
+BCC
+
+FIG Generation_distributions/gamHist.Rout-0.pdf
+
+NCC
+
+WIDEFIG Generation_distributions/gamHist.Rout-1.pdf
+
+EC
+
+----------------------------------------------------------------------
+
+Moment approximation
+
+BCC
+
+WIDEFIG Generation_distributions/gamHist.Rout-2.pdf
+
+NCC
+
+WIDEFIG Generation_distributions/gamHist.Rout-3.pdf
+
+EC
+
+----------------------------------------------------------------------
+
+Moment approximation
+
+BCC
+
+WIDEFIG Generation_distributions/gamHist.Rout-4.pdf
+
+NCC
+
+WIDEFIG Generation_distributions/gamHist.Rout-5.pdf
+
+EC
+
+----------------------------------------------------------------------
+
+Moment approximation
+
+BCC
+
+WIDEFIG Generation_distributions/gamHist.Rout-6.pdf
+
+NCC
+
+WIDEFIG Generation_distributions/gamHist.Rout-7.pdf
+
+EC
+
+----------------------------------------------------------------------
+
+Fitting to Ebola
+
+	Simulate generation intervals based on data and approach from
+	WHO report
+
+	Use both lognormals and gammas
+	
+		WHO used gammas
+
+		Lognormals should be more challenging
+
+----------------------------------------------------------------------
+
+Approximating the distribution
+
+BCC
+
+WIDEFIG Generation_distributions/lognormal.hist.Rout.pdf
+
+NCC
+
+WIDEFIG Generation_distributions/lognormal.ga.hist.Rout.pdf
+
+EC
+
+----------------------------------------------------------------------
+
+Approximating the curve
+
+WIDEFIG Generation_distributions/lognormal.curve.Rout.pdf
+
+----------------------------------------------------------------------
+
+TSEC Conclusion
+
+	Generation intervals are the missing link between $r$ and \Rx
+
+	We need better methods for estimating them, and propagating
+	uncertainty to other parts of the model
+
+	Filtered means can aid understanding
+
+	Approximations may aid estimation
+
+	For Ebola:
+
+		Knowing the mean generation interval is not enough
+
+		But knowing the mean and CV may be enough
+
+----------------------------------------------------------------------
+
+Thanks
+
+	Organizers
+
+	Audience
+
+	Collaborators: Steve Bellan, David Champredon, Joshua Weitz
+
+	Funders: NSERC, CIHR
+

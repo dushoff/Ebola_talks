@@ -2,7 +2,7 @@
 ### Hooks for the editor to set the default target
 current: target
 
-target pngtarget pdftarget vtarget acrtarget: math.draft.pdf 
+target pngtarget pdftarget vtarget acrtarget: math.translate.txt 
 
 ##################################################################
 
@@ -21,14 +21,14 @@ include stuff.mk
 Sources += local.txt.format
 
 ## Copyright not integrated into make system yet
-Sources += copy.tex
+Sources += copy.tex math.txt
 
 math.draft.pdf: math.txt
 
 ## Markup
-
-math.txt: ../makestuff/newtalk/JD_lecture_format.pl math.old.txt
-#	$(PUSH)
+Sources += math.old.txt
+math.translate.txt: ../makestuff/newtalk/JD_lecture_format.pl math.old.txt
+	$(PUSH)
 
 ######################################################################
 
