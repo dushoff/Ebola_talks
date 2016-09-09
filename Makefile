@@ -2,7 +2,7 @@
 ### Hooks for the editor to set the default target
 current: target
 
-target pngtarget pdftarget vtarget acrtarget: math.translate.txt 
+target pngtarget pdftarget vtarget acrtarget: math.draft.pdf 
 
 ##################################################################
 
